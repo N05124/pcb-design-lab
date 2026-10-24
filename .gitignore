@@ -7,3 +7,4 @@ benchmark/boards/
 fp-info-cache
 __pycache__/
 *.pyc
+benchmark/results/run_*.log
