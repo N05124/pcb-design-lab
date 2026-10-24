@@ -33,6 +33,9 @@ CONFIGS = {
     "fr25-default": (JAVA25, "freerouting-2.5.0.jar", []),
     "fr25-fanout": (JAVA25, "freerouting-2.5.0.jar", ["--router.fanout.enabled=true"]),
     "fr21-default": (JAVA21, "freerouting-2.1.0.jar", []),
+    # 2.5 necks traces down to pad size near pins, which can violate the
+    # board's minimum width; this config turns that off.
+    "fr25-noneckdown": (JAVA25, "freerouting-2.5.0.jar", ["--router.automatic_neckdown=false"]),
 }
 
 NOISE = ("memory leak", "stdpbase", "JAVA_TOOL_OPTIONS")
