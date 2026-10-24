@@ -20,7 +20,14 @@ A self-study and benchmarking repo for getting from "my first board" to genuinel
 
 ## Benchmark headline
 
-See [benchmark/RESULTS.md](benchmark/RESULTS.md).
+We stripped the routing from 19 real open-source boards and let Freerouting (the main free autorouter) redo it, grading the result with KiCad's own DRC. Full write-up: **[benchmark/RESULTS.md](benchmark/RESULTS.md)**.
+
+![Completion vs. board complexity](benchmark/images/completion_vs_complexity.png)
+
+- 2-layer boards: 78–100 % routed in under 4 minutes.
+- Modern 6–12 layer boards (DDR, fine-pitch BGA, dozens of diff pairs): 0.2–63 % in 15 minutes.
+- The router's own "done" count is optimistic — it chops up ground pours and strands pads that KiCad then flags.
+- Freerouting 2.5's default neck-down breaks minimum-width rules; pass `--router.automatic_neckdown=false`.
 
 ## Licences
 

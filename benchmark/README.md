@@ -27,8 +27,8 @@ stripped.kicad_pcb + result.ses ──evaluate.py──▶ routed.kicad_pcb + Ki
 
 | Metric | Meaning |
 |---|---|
-| **To route** | KiCad's count of unconnected pads after stripping (zones stay, so plane-connected pads don't count) |
-| **Left unrouted (KiCad)** | Unconnected pads KiCad still reports after the autorouter's copper is imported and zones are refilled. This is the honest completion number — it can be higher than the router's own count (see findings) |
+| **To route** | Unrouted connections (ratsnest edges) reported by KiCad's connectivity engine after stripping and refilling zones — so pads already joined by a pour don't count |
+| **Left unrouted** | The same count after the autorouter's copper is imported and zones are refilled. This is the honest completion number — it is often higher than the router's own count (see [RESULTS](RESULTS.md)). We use the connectivity engine rather than the DRC report because KiCad 7's DRC report caps unconnected items at 499 |
 | **Completion** | `(to_route − left) / to_route` |
 | **New DRC errors** | DRC violations in the routed board minus those already in the original, by type, excluding unconnected items |
 | **Vias / length** | Autorouter vs. the human's original routing on the same placement |
@@ -40,6 +40,7 @@ stripped.kicad_pcb + result.ses ──evaluate.py──▶ routed.kicad_pcb + Ki
 | `fr25-default` | Freerouting 2.5.0 (Oct 2026) | Defaults; needs Java 25 |
 | `fr25-fanout` | Freerouting 2.5.0 | `router.fanout.enabled=true` (fan out SMD pads before routing) |
 | `fr21-default` | Freerouting 2.1.0 (Apr 2025) | Previous generation, for regression comparison; Java 21 |
+| `fr25-noneckdown` | Freerouting 2.5.0 | `router.automatic_neckdown=false` — avoids sub-minimum trace widths near pins |
 
 ## Reproduce
 
@@ -51,13 +52,17 @@ bash benchmark/scripts/fetch_tools.sh          # downloads Freerouting jars into
 bash benchmark/scripts/fetch_boards.sh         # clones the GitHub boards listed in boards.json
 cd benchmark
 python3 scripts/run_benchmark.py --configs fr25-default,fr25-fanout,fr21-default --timeout-min 12 --jobs 2
+python3 scripts/run_benchmark.py --reuse ...   # re-grade existing routes without re-routing
 python3 scripts/make_report.py
+python3 scripts/plot_results.py
+python3 scripts/render_compare.py work/<board-id> fr25-default images/<board-id>.png
 ```
 
 Environment variables `KICAD_PY`, `JAVA21`, `JAVA25`, `FREEROUTING_DIR` override the default paths.
 
 ## Limitations
 
+- **KiCad 7.0.11 quirks handled by the scripts:** duplicate reference designators (logo footprints such as `REF**`) block DSN export, so they are renamed first; DRC leaves markers that crash later edits, so the board is reloaded before stripping; intermittent internal-assert traps are retried, with a no-zone-refill fallback. One board (ThunderScope) still crashes KiCad 7 and is excluded.
 - **KiCad 7.0.11** is what Ubuntu 24.04 ships; boards saved by KiCad 8/9/10 can't be opened, which limits which open-source boards are usable. The scripts use only APIs that also exist in KiCad 8–9.
 - Routing is graded on connectivity and clearance only. Impedance, length matching and return paths are **not** checked here — run [`tools/check_constraints.py`](../tools/check_constraints.py) on a routed board for that, and expect an autorouter to fail it.
 - Placement is the human's. Real autorouting quality depends heavily on placement; this benchmark isolates the routing step.
