@@ -2,3 +2,65 @@
 [prepare] pocketbeagle
 [prepare] beagleconnect-freedom
 [prepare] glasgow-revc3
+  ! prepare failed for glasgow-revc3:
+DSN export failed
+[prepare] ulx3s
+  ! prepare failed for ulx3s:
+DSN export failed
+[prepare] hackrf-one
+  ! prepare failed for hackrf-one:
+DSN export failed
+[prepare] lpddr4-testbed
+  ! prepare failed for lpddr4-testbed:
+DSN export failed
+[prepare] thunderscope-fpga
+  ! prepare failed for thunderscope-fpga:
+ure"" failed in kimathLogOverflow(): 
+
+Overflow converting value -2147483648.000000 to i.
+./libs/kimath/src/math/util.cpp(61): assert ""Assert failure"" failed in kimathLogOverflow(): 
+
+Overflow converting value -2147483648.000000 to i.
+./libs/kimath/src/math/util.cpp(61): assert ""Assert failure"" failed in kimathLogOverflow(): 
+
+Overflow converting value -2147483648.000000 to i.
+./libs/kimath/src/math/util.cpp(61): assert ""Assert failure"" failed in kimathLogOverflow(): 
+
+Overflow converting value -2147483648.000000 to i.
+./libs/kimath/src/math/util.cpp(61): assert ""Assert failure"" failed in kimathLogOverflow(): 
+
+Overflow converting value -2147483648.000000 to i.
+./libs/kimath/src/math/util.cpp(61): assert ""Assert failure"" failed in kimathLogOverflow(): 
+
+Overflow converting value -2147483648.000000 to i.
+./libs/kimath/src/math/util.cpp(61): assert ""Assert failure"" failed in kimathLogOverflow(): 
+
+Overflow converting value -2147483648.000000 to i.
+./libs/kimath/src/math/util.cpp(61): assert ""Assert failure"" failed in kimathLogOverflow(): 
+
+Overflow converting value -2147483648.000000 to i.
+./libs/kimath/src/math/util.cpp(61): assert ""Assert failure"" failed in kimathLogOverflow(): 
+
+Overflow converting value -2147483648.000000 to i.
+./libs/kimath/src/math/util.cpp(61): assert ""Assert failure"" failed in kimathLogOverflow(): 
+
+Overflow converting value -2147483648.000000 to i.
+./libs/kimath/src/math/util.cpp(61): assert ""Assert failure"" failed in kimathLogOverflow(): 
+
+Overflow converting value -2147483648.000000 to i.
+./libs/kimath/src/math/util.cpp(61): assert ""Assert failure"" failed in kimathLogOverflow(): 
+
+Overflow converting value -2147483648.000000 to i.
+./libs/kimath/src/math/util.cpp(61): assert ""Assert failure"" failed in kimathLogOverflow(): 
+
+Overflow converting value -2147483648.000000 to i.
+./libs/kimath/src/math/util.cpp(61): assert ""Assert failure"" failed in kimathLogOverflow(): 
+
+Overflow converting value -2147483648.000000 to i.
+[prepare] butterstick
+  ! prepare failed for butterstick:
+DSN export failed
+[prepare] imx8mp-som
+[prepare] jetson-orin-baseboard
+[prepare] rdimm-ddr4-tester
+[done] strf                         fr25-default   fr_unrouted=4 kicad_unconnected=14 wall=88.0s 

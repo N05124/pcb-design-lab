@@ -166,7 +166,28 @@ def strip_routing(board) -> int:
     return len(items)
 
 
+def dedupe_references(board) -> int:
+    """KiCad's Specctra exporter rejects boards with duplicate or empty
+    reference designators (common on logos/graphics footprints such as
+    'REF**'). Give those a unique suffix; it doesn't change any connectivity."""
+    seen = {}
+    renamed = 0
+    for fp in board.GetFootprints():
+        ref = fp.GetReference().strip() or "NOREF"
+        n = seen.get(ref, 0)
+        seen[ref] = n + 1
+        if n or not fp.GetReference().strip():
+            fp.SetReference(f"{ref}_dup{n}")
+            renamed += 1
+    return renamed
+
+
 def refill_zones(board) -> bool:
+    import os
+    if os.environ.get("PCBBENCH_NO_REFILL") == "1":
+        # Fallback for boards where KiCad 7's multithreaded zone filler traps
+        # (seen on boards with coordinate-overflow warnings): keep stored fills.
+        return False
     zones = board.Zones()
     if len(list(zones)) == 0:
         return True

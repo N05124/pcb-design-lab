@@ -10,10 +10,14 @@ Writes into out_dir:
     routed.json        stats + DRC summary
 """
 import json
+import signal
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+# KiCad's distro builds turn some internal asserts (e.g. coordinate overflow
+# warnings on boards with far-away graphics) into SIGTRAP; ignore them.
+signal.signal(signal.SIGTRAP, signal.SIG_IGN)
 import pcbnew  # noqa: E402
 import pcbbench as pb  # noqa: E402
 

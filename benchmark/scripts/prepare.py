@@ -11,11 +11,15 @@ Writes into out_dir:
     board.dsn            Specctra DSN of the stripped board (autorouter input)
 """
 import json
+import signal
 import sys
 import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+# KiCad's distro builds turn some internal asserts (e.g. coordinate overflow
+# warnings on boards with far-away graphics) into SIGTRAP; ignore them.
+signal.signal(signal.SIGTRAP, signal.SIG_IGN)
 import pcbnew  # noqa: E402
 import pcbbench as pb  # noqa: E402
 
@@ -30,9 +34,13 @@ def main():
     original_unconnected = pb.unconnected_count(board)
     drc = pb.run_drc(board, out / "original_drc.rpt")
 
+    # Reload: DRC leaves markers pointing at tracks we're about to delete,
+    # which crashes KiCad 7 later on some boards.
+    board = pcbnew.LoadBoard(str(src))
+    renamed_refs = pb.dedupe_references(board)
     removed = pb.strip_routing(board)
     pb.refill_zones(board)
-    stripped_drc = pb.run_drc(board, out / "stripped_drc.rpt")
+    stripped_unconnected = pb.unconnected_count(board)
     pcbnew.SaveBoard(str(out / "stripped.kicad_pcb"), board)
     pb.attach_project_files(out / "stripped.kicad_pcb", src)
 
@@ -46,13 +54,14 @@ def main():
         "stats": stats,
         "drc": drc,
         "removed_items": removed,
+        "renamed_duplicate_refs": renamed_refs,
         "original_unconnected": original_unconnected,
-        "unrouted_after_strip": stripped_drc["unconnected"],
+        "unrouted_after_strip": stripped_unconnected,
         "dsn_export_s": round(time.time() - t0, 2),
     }
     (out / "original.json").write_text(json.dumps(result, indent=2))
     print(json.dumps({"stats": stats, "drc": {k: drc[k] for k in ("violations", "unconnected")},
-                      "unrouted_after_strip": stripped_drc["unconnected"]}))
+                      "unrouted_after_strip": stripped_unconnected}))
 
 
 if __name__ == "__main__":

@@ -38,10 +38,10 @@ CONFIGS = {
 NOISE = ("memory leak", "stdpbase", "JAVA_TOOL_OPTIONS")
 
 
-def run(cmd, log_path: Path, timeout_s: float | None = None) -> tuple[int, float, str]:
+def run(cmd, log_path: Path, timeout_s: float | None = None, env=None) -> tuple[int, float, str]:
     t0 = time.time()
     try:
-        p = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout_s)
+        p = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout_s, env=env)
         rc, out = p.returncode, p.stdout + p.stderr
     except subprocess.TimeoutExpired as e:
         rc = -9
@@ -75,15 +75,32 @@ def parse_freerouting_log(text: str) -> dict:
     }
 
 
+def run_kicad(cmd, log_path: Path) -> tuple[int, str, bool]:
+    """Run a KiCad-Python step, retrying on KiCad 7's intermittent SIGTRAP
+    (exit 133). The last attempt skips zone refills. Returns (rc, log, refilled)."""
+    for attempt in range(3):
+        env = dict(os.environ)
+        no_refill = attempt == 2
+        if no_refill:
+            env["PCBBENCH_NO_REFILL"] = "1"
+        rc, _, log = run(cmd, log_path, env=env)
+        if rc == 0:
+            return rc, log, not no_refill
+    return rc, log, False
+
+
 def prepare(board: dict, out: Path) -> dict:
     out.mkdir(parents=True, exist_ok=True)
     cache = out / "original.json"
     if cache.exists() and (out / "board.dsn").exists():
         return json.loads(cache.read_text())
-    rc, dt, log = run([KICAD_PY, str(HERE / "prepare.py"), board["path"], str(out)], out / "prepare.log")
+    rc, log, refilled = run_kicad([KICAD_PY, str(HERE / "prepare.py"), board["path"], str(out)], out / "prepare.log")
     if rc != 0 or not cache.exists():
-        raise RuntimeError(f"prepare failed for {board['id']}:\n{log[-2000:]}")
-    return json.loads(cache.read_text())
+        raise RuntimeError(f"prepare failed for {board['id']} (exit {rc}):\n{log[-1500:]}")
+    data = json.loads(cache.read_text())
+    data["zones_refilled"] = refilled
+    cache.write_text(json.dumps(data, indent=2))
+    return data
 
 
 def route_and_eval(board: dict, cfg: str, prep_dir: Path, timeout_min: int, reuse: bool = False) -> dict:
@@ -115,8 +132,9 @@ def route_and_eval(board: dict, cfg: str, prep_dir: Path, timeout_min: int, reus
     if not ses.exists():
         rec["error"] = "no SES produced"
         return rec
-    rc, _, elog = run([KICAD_PY, str(HERE / "evaluate.py"), str(prep_dir / "stripped.kicad_pcb"),
-                       str(prep_dir / "board.dsn"), str(ses), str(out)], out / "evaluate.log")
+    rc, elog, refilled = run_kicad([KICAD_PY, str(HERE / "evaluate.py"), str(prep_dir / "stripped.kicad_pcb"),
+                                    str(prep_dir / "board.dsn"), str(ses), str(out)], out / "evaluate.log")
+    rec["eval_zones_refilled"] = refilled
     rj = out / "routed.json"
     if rc != 0 or not rj.exists():
         rec["error"] = "evaluate failed: " + elog[-500:]
