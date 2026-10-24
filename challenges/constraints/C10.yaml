@@ -1,0 +1,11 @@
+# Template: rename the net patterns to match your schematic's net names.
+# Run: python3 tools/check_constraints.py <board>.kicad_pcb challenges/constraints/C10.yaml
+# Fill these from the module vendor's carrier design guide.
+rules:
+  - {name: PCIe lanes skew, type: match_group, nets: '^/PCIE_TX0_[PN]$', tolerance_mm: 0.13}
+  - {name: USB3 SSTX skew, type: diff_pair, pos: /USB0_SSTX_P, neg: /USB0_SSTX_N, max_skew_mm: 0.13}
+  - {name: CSI0 lanes to clock, type: match_group, nets: '^/CSI0_D[0-3]_P$', reference: /CSI0_CLK_P, tolerance_mm: 0.5}
+  - {name: HDMI TMDS lanes matched, type: match_group, nets: '^/HDMI_D[0-2]_P$', reference: /HDMI_CLK_P, tolerance_mm: 2.5}
+  - {name: 10GBASE-T MDI pairs, type: match_group, nets: '^/MDI[0-3]_P$', tolerance_mm: 1.0}
+  - {name: High-speed nets max 2 vias, type: max_vias, nets: '^/(PCIE|USB\d_SS|HDMI_D|CSI\d_D)', max: 2}
+  - {name: Everything routed, type: routed, nets: '^/'}

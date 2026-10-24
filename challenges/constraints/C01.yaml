@@ -1,0 +1,9 @@
+# Template: rename the net patterns to match your schematic's net names.
+# Run: python3 tools/check_constraints.py <board>.kicad_pcb challenges/constraints/C01.yaml
+rules:
+  - {name: CH0 input pair matched, type: diff_pair, pos: /AIN0_P, neg: /AIN0_N, max_skew_mm: 1.0}
+  - {name: CH1 input pair matched, type: diff_pair, pos: /AIN1_P, neg: /AIN1_N, max_skew_mm: 1.0}
+  - {name: CH2 input pair matched, type: diff_pair, pos: /AIN2_P, neg: /AIN2_N, max_skew_mm: 1.0}
+  - {name: CH3 input pair matched, type: diff_pair, pos: /AIN3_P, neg: /AIN3_N, max_skew_mm: 1.0}
+  - {name: Analog inputs avoid vias, type: max_vias, nets: '^/AIN', max: 0}
+  - {name: Everything routed, type: routed, nets: '^/'}

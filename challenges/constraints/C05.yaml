@@ -1,0 +1,9 @@
+# Template: rename the net patterns to match your schematic's net names.
+# Run: python3 tools/check_constraints.py <board>.kicad_pcb challenges/constraints/C05.yaml
+rules:
+  - {name: Bank 14 to connector A matched, type: match_group, nets: '^/B14_IO\d+$', tolerance_mm: 5}
+  - {name: Bank 15 to connector A matched, type: match_group, nets: '^/B15_IO\d+$', tolerance_mm: 5}
+  - {name: Bank 34 to connector B matched, type: match_group, nets: '^/B34_IO\d+$', tolerance_mm: 5}
+  - {name: Bank 35 to connector B matched, type: match_group, nets: '^/B35_IO\d+$', tolerance_mm: 5}
+  - {name: Clocks max 2 vias, type: max_vias, nets: '(?i)clk', max: 2}
+  - {name: Every ball routed, type: routed, nets: '^/'}

@@ -1,0 +1,14 @@
+# Template: rename the net patterns to match your schematic's net names.
+# Run: python3 tools/check_constraints.py <board>.kicad_pcb challenges/constraints/C07.yaml
+rules:
+  - {name: TX0 skew, type: diff_pair, pos: /PCIE_TX0_P, neg: /PCIE_TX0_N, max_skew_mm: 0.13, max_length_mm: 75}
+  - {name: RX0 skew, type: diff_pair, pos: /PCIE_RX0_P, neg: /PCIE_RX0_N, max_skew_mm: 0.13, max_length_mm: 75}
+  - {name: TX1 skew, type: diff_pair, pos: /PCIE_TX1_P, neg: /PCIE_TX1_N, max_skew_mm: 0.13, max_length_mm: 75}
+  - {name: RX1 skew, type: diff_pair, pos: /PCIE_RX1_P, neg: /PCIE_RX1_N, max_skew_mm: 0.13, max_length_mm: 75}
+  - {name: TX2 skew, type: diff_pair, pos: /PCIE_TX2_P, neg: /PCIE_TX2_N, max_skew_mm: 0.13, max_length_mm: 75}
+  - {name: RX2 skew, type: diff_pair, pos: /PCIE_RX2_P, neg: /PCIE_RX2_N, max_skew_mm: 0.13, max_length_mm: 75}
+  - {name: TX3 skew, type: diff_pair, pos: /PCIE_TX3_P, neg: /PCIE_TX3_N, max_skew_mm: 0.13, max_length_mm: 75}
+  - {name: RX3 skew, type: diff_pair, pos: /PCIE_RX3_P, neg: /PCIE_RX3_N, max_skew_mm: 0.13, max_length_mm: 75}
+  - {name: REFCLK skew, type: diff_pair, pos: /PCIE_REFCLK_P, neg: /PCIE_REFCLK_N, max_skew_mm: 0.13}
+  - {name: Lanes max 2 vias, type: max_vias, nets: '^/PCIE_(TX|RX)\d_[PN]$', max: 2}
+  - {name: Everything routed, type: routed, nets: '^/'}

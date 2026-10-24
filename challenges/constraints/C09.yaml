@@ -1,0 +1,8 @@
+# Template: rename the net patterns to match your schematic's net names.
+# Run: python3 tools/check_constraints.py <board>.kicad_pcb challenges/constraints/C09.yaml
+rules:
+  - {name: MIPI DSI lane 0 to clock, type: match_group, nets: '^/DSI_D0_[PN]$', reference: /DSI_CLK_P, tolerance_mm: 0.2}
+  - {name: MIPI DSI lane 1 to clock, type: match_group, nets: '^/DSI_D1_[PN]$', reference: /DSI_CLK_P, tolerance_mm: 0.2}
+  - {name: DSI clock pair, type: diff_pair, pos: /DSI_CLK_P, neg: /DSI_CLK_N, max_skew_mm: 0.05}
+  - {name: LPDDR4X byte 0 to DQS0, type: match_group, nets: '^/LP_DQ[0-7]$', reference: /LP_DQS0_T, tolerance_mm: 0.3}
+  - {name: Everything routed, type: routed, nets: '^/'}

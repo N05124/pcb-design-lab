@@ -1,0 +1,8 @@
+# Template: rename the net patterns to match your schematic's net names.
+# Run: python3 tools/check_constraints.py <board>.kicad_pcb challenges/constraints/C04.yaml
+rules:
+  - {name: Remote sense pair matched, type: diff_pair, pos: /VSEN_P, neg: /VSEN_N, max_skew_mm: 2.0}
+  - {name: Remote sense on inner layer, type: layers, nets: '^/VSEN_', allowed: [In3.Cu, In4.Cu]}
+  - {name: Switch nodes top layer only, type: layers, nets: '^/SW\d', allowed: [F.Cu]}
+  - {name: Current-sense pairs matched, type: match_group, nets: '^/CS\d_[PN]$', tolerance_mm: 2.0}
+  - {name: Everything routed, type: routed, nets: '^/'}

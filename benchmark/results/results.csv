@@ -1,0 +1,4 @@
+board,board_name,config,layers,pads,nets,pad_density_cm2,min_pitch_mm,connections_to_route,fr_reported_unrouted,kicad_unconnected,completion_pct,new_drc_violations,new_drc_by_type,human_vias,auto_vias,human_length_mm,auto_length_mm,wall_s,fr_state,fr_passes,fr_peak_heap_mb,error
+kicad-pic-programmer,KiCad demo: PIC programmer,fr25-default,2,247,112,1.56,1.45,86,0,2,97.7,4,clearance=1;lib_footprint_issues=2;starved_thermal=1,6,1,1745.6,1549.9,49.2,COMPLETED,3,259.3,
+kicad-pic-programmer,KiCad demo: PIC programmer,fr25-fanout,2,247,112,1.56,1.45,86,0,2,97.7,10,clearance=8;lib_footprint_issues=2,6,2,1745.6,1560.5,20.4,COMPLETED,2,156.8,
+kicad-stickhub,KiCad demo: StickHub USB hub,fr25-default,2,278,48,41.76,0.5,128,8,28,78.1,111,solder_mask_bridge=8;track_width=103,87,45,742.6,537.0,211.5,COMPLETED,24,398.4,

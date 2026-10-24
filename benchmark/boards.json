@@ -1,0 +1,148 @@
+{
+  "boards": [
+    {
+      "id": "kicad-pic-programmer",
+      "name": "KiCad demo: PIC programmer",
+      "path": "/usr/share/kicad/demos/pic_programmer/pic_programmer.kicad_pcb",
+      "source": "KiCad 7.0.11 demos (GPL-3.0+ / CC-BY-SA per KiCad demos), github.com/KiCad/kicad-source-mirror/tree/7.0/demos"
+    },
+    {
+      "id": "kicad-stickhub",
+      "name": "KiCad demo: StickHub USB hub",
+      "path": "/usr/share/kicad/demos/stickhub/StickHub.kicad_pcb",
+      "source": "KiCad 7.0.11 demos (GPL-3.0+ / CC-BY-SA per KiCad demos), github.com/KiCad/kicad-source-mirror/tree/7.0/demos"
+    },
+    {
+      "id": "kicad-sonde-xilinx",
+      "name": "KiCad demo: Xilinx probe",
+      "path": "/usr/share/kicad/demos/sonde xilinx/sonde xilinx.kicad_pcb",
+      "source": "KiCad 7.0.11 demos (GPL-3.0+ / CC-BY-SA per KiCad demos), github.com/KiCad/kicad-source-mirror/tree/7.0/demos"
+    },
+    {
+      "id": "kicad-interf-u",
+      "name": "KiCad demo: interf_u",
+      "path": "/usr/share/kicad/demos/interf_u/interf_u.kicad_pcb",
+      "source": "KiCad 7.0.11 demos (GPL-3.0+ / CC-BY-SA per KiCad demos), github.com/KiCad/kicad-source-mirror/tree/7.0/demos"
+    },
+    {
+      "id": "kicad-xil-95108",
+      "name": "KiCad demo: XC95108 CPLD test board",
+      "path": "/usr/share/kicad/demos/test_xil_95108/carte_test.kicad_pcb",
+      "source": "KiCad 7.0.11 demos (GPL-3.0+ / CC-BY-SA per KiCad demos), github.com/KiCad/kicad-source-mirror/tree/7.0/demos"
+    },
+    {
+      "id": "kicad-complex-hierarchy",
+      "name": "KiCad demo: complex hierarchy",
+      "path": "/usr/share/kicad/demos/complex_hierarchy/complex_hierarchy.kicad_pcb",
+      "source": "KiCad 7.0.11 demos (GPL-3.0+ / CC-BY-SA per KiCad demos), github.com/KiCad/kicad-source-mirror/tree/7.0/demos"
+    },
+    {
+      "id": "kicad-coldfire",
+      "name": "KiCad demo: ColdFire MCF5213 + Xilinx dev kit",
+      "path": "/usr/share/kicad/demos/kit-dev-coldfire-xilinx_5213/kit-dev-coldfire-xilinx_5213.kicad_pcb",
+      "source": "KiCad 7.0.11 demos (GPL-3.0+ / CC-BY-SA per KiCad demos), github.com/KiCad/kicad-source-mirror/tree/7.0/demos"
+    },
+    {
+      "id": "kicad-video",
+      "name": "KiCad demo: video board (FPGA + SDRAM)",
+      "path": "/usr/share/kicad/demos/video/video.kicad_pcb",
+      "source": "KiCad 7.0.11 demos (GPL-3.0+ / CC-BY-SA per KiCad demos), github.com/KiCad/kicad-source-mirror/tree/7.0/demos"
+    },
+    {
+      "id": "strf",
+      "name": "STRF (RF/MCU module, 0.5 mm pitch)",
+      "path": "boards/STRF-Kicad/STRF.kicad_pcb",
+      "repo": "https://github.com/pms67/STRF-Kicad",
+      "source": "github.com/pms67/STRF-Kicad \u2014 used in DeepPCB's published DeepPCB-vs-Quilter comparison",
+      "ref": "HEAD"
+    },
+    {
+      "id": "pocketbeagle",
+      "name": "PocketBeagle (OSD3358 SiP BGA)",
+      "path": "boards/pocketbeagle/KiCAD/PocketBeagle.kicad_pcb",
+      "repo": "https://github.com/beagleboard/pocketbeagle",
+      "source": "github.com/beagleboard/pocketbeagle (CC BY-SA) \u2014 used in DeepPCB's comparison",
+      "ref": "HEAD"
+    },
+    {
+      "id": "beagleconnect-freedom",
+      "name": "BeagleConnect Freedom (sub-GHz + 2.4 GHz)",
+      "path": "boards/bcf/hw/KICAD/BeagleConnect Freedom C7.kicad_pcb",
+      "repo": "https://github.com/beagleboard/beagleconnect-freedom",
+      "source": "github.com/beagleboard/beagleconnect-freedom (mirror of git.beagleboard.org/beagleconnect/freedom) \u2014 used in DeepPCB's comparison",
+      "ref": "HEAD"
+    },
+    {
+      "id": "glasgow-revc3",
+      "name": "Glasgow revC3 (iCE40 BGA-121, USB HS)",
+      "path": "boards/glasgow/hardware/boards/glasgow/revC3/glasgow.kicad_pcb",
+      "repo": "https://github.com/GlasgowEmbedded/glasgow",
+      "ref": "main",
+      "source": "https://github.com/GlasgowEmbedded/glasgow"
+    },
+    {
+      "id": "ulx3s",
+      "name": "ULX3S (ECP5 BGA-381 on 4 layers)",
+      "path": "boards/ulx3s/ulx3s.kicad_pcb",
+      "repo": "https://github.com/emard/ulx3s",
+      "ref": "master",
+      "source": "https://github.com/emard/ulx3s"
+    },
+    {
+      "id": "hackrf-one",
+      "name": "HackRF One (RF + digital)",
+      "path": "boards/hackrf/hardware/hackrf-one/hackrf-one.kicad_pcb",
+      "repo": "https://github.com/greatscottgadgets/hackrf",
+      "ref": "main",
+      "source": "https://github.com/greatscottgadgets/hackrf"
+    },
+    {
+      "id": "lpddr4-testbed",
+      "name": "Antmicro LPDDR4 testbed (6 layers)",
+      "path": "boards/lpddr4-testbed/lpddr4-testbed.kicad_pcb",
+      "repo": "https://github.com/antmicro/lpddr4-testbed",
+      "ref": "75e82c137c1ff42867a0d169fb71a247bcdec1f3",
+      "source": "https://github.com/antmicro/lpddr4-testbed"
+    },
+    {
+      "id": "thunderscope-fpga",
+      "name": "ThunderScope FPGA module Rev2 (Artix-7, 6 layers)",
+      "path": "boards/thunderscope/Hardware/KiCad/FPGA_Module_Rev2/TS_FPGA_Module_Rev2.kicad_pcb",
+      "repo": "https://github.com/EEVengers/ThunderScope",
+      "ref": "98cfa16e148d1ddfaec6396710b9f1fade844137",
+      "source": "https://github.com/EEVengers/ThunderScope"
+    },
+    {
+      "id": "butterstick",
+      "name": "ButterStick r1.0 (ECP5 + 2x DDR3L, 8 layers)",
+      "path": "boards/butterstick/hardware/ButterStick_r1.0/ButterStick.kicad_pcb",
+      "repo": "https://github.com/gregdavill/ButterStick",
+      "ref": "main",
+      "source": "https://github.com/gregdavill/ButterStick"
+    },
+    {
+      "id": "imx8mp-som",
+      "name": "Olimex iMX8MP SOM Rev B (0.5 mm FCBGA + LPDDR4)",
+      "path": "boards/imx8mp-som/HARDWARE/iMX8MP-SOM-xGB-IND/iMX8MPLUS-SOM_Rev_B.kicad_pcb",
+      "repo": "https://github.com/OLIMEX/iMX8MP-SOM",
+      "ref": "main",
+      "source": "https://github.com/OLIMEX/iMX8MP-SOM"
+    },
+    {
+      "id": "jetson-orin-baseboard",
+      "name": "Antmicro Jetson Orin baseboard (8 layers)",
+      "path": "boards/jetson-orin-baseboard/jetson-orin-baseboard.kicad_pcb",
+      "repo": "https://github.com/antmicro/jetson-orin-baseboard",
+      "ref": "0b326f4596778c1b0d993c0c30af85d8d5a4fd85",
+      "source": "https://github.com/antmicro/jetson-orin-baseboard"
+    },
+    {
+      "id": "rdimm-ddr4-tester",
+      "name": "Antmicro RDIMM DDR4 tester (12 layers, blind vias)",
+      "path": "boards/rdimm-ddr4-tester/data-center-rdimm-ddr4-tester.kicad_pcb",
+      "repo": "https://github.com/antmicro/rdimm-ddr4-tester",
+      "ref": "main",
+      "source": "https://github.com/antmicro/rdimm-ddr4-tester"
+    }
+  ]
+}

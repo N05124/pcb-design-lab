@@ -1,0 +1,16 @@
+# Template: rename the net patterns to match your schematic's net names.
+# Run: python3 tools/check_constraints.py <board>.kicad_pcb challenges/constraints/C06.yaml
+# Example targets only - your memory controller's design guide overrides these.
+rules:
+  - {name: Byte lane 0 to DQS0, type: match_group, nets: '^/DDR_(DQ[0-7]|DM0)$', reference: /DDR_DQS0_P, tolerance_mm: 0.5}
+  - {name: Byte lane 1 to DQS1, type: match_group, nets: '^/DDR_(DQ([89]|1[0-5])|DM1)$', reference: /DDR_DQS1_P, tolerance_mm: 0.5}
+  - {name: Byte lane 2 to DQS2, type: match_group, nets: '^/DDR_(DQ(1[6-9]|2[0-3])|DM2)$', reference: /DDR_DQS2_P, tolerance_mm: 0.5}
+  - {name: Byte lane 3 to DQS3, type: match_group, nets: '^/DDR_(DQ(2[4-9]|3[01])|DM3)$', reference: /DDR_DQS3_P, tolerance_mm: 0.5}
+  - {name: DQS0 pair, type: diff_pair, pos: /DDR_DQS0_P, neg: /DDR_DQS0_N, max_skew_mm: 0.13}
+  - {name: DQS1 pair, type: diff_pair, pos: /DDR_DQS1_P, neg: /DDR_DQS1_N, max_skew_mm: 0.13}
+  - {name: DQS2 pair, type: diff_pair, pos: /DDR_DQS2_P, neg: /DDR_DQS2_N, max_skew_mm: 0.13}
+  - {name: DQS3 pair, type: diff_pair, pos: /DDR_DQS3_P, neg: /DDR_DQS3_N, max_skew_mm: 0.13}
+  - {name: CK pair, type: diff_pair, pos: /DDR_CK_P, neg: /DDR_CK_N, max_skew_mm: 0.13}
+  - {name: Addr/cmd/ctrl matched to CK, type: match_group, nets: '^/DDR_(A\d+|BA\d|BG\d|ACT_N|CS_N|CKE|ODT|PAR)$', reference: /DDR_CK_P, tolerance_mm: 2.5}
+  - {name: DQ nets max 2 vias, type: max_vias, nets: '^/DDR_DQ\d+$', max: 2}
+  - {name: Everything routed, type: routed, nets: '^/DDR_'}

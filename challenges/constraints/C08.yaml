@@ -1,0 +1,12 @@
+# Template: rename the net patterns to match your schematic's net names.
+# Run: python3 tools/check_constraints.py <board>.kicad_pcb challenges/constraints/C08.yaml
+# Creepage/clearance is enforced with KiCad custom rules (.kicad_dru), not here. Example .kicad_dru:
+#   (version 1)
+#   (rule "HV to LV reinforced"
+#     (condition "A.NetClass == 'HV_HS' && B.NetClass == 'LV'")
+#     (constraint clearance (min 8mm)))
+rules:
+  - {name: High-side gate drive outer layers, type: layers, nets: '^/(GH|SH_K)', allowed: [F.Cu, B.Cu]}
+  - {name: Low-side gate drive outer layers, type: layers, nets: '^/(GL|SL_K)', allowed: [F.Cu, B.Cu]}
+  - {name: Gate nets via-free, type: max_vias, nets: '^/G[HL]$', max: 0}
+  - {name: Everything routed, type: routed, nets: '^/'}

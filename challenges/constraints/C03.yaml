@@ -1,0 +1,8 @@
+# Template: rename the net patterns to match your schematic's net names.
+# Run: python3 tools/check_constraints.py <board>.kicad_pcb challenges/constraints/C03.yaml
+rules:
+  - {name: RF feed width = computed GCPW width +/-0.02 mm, type: width, nets: '^/RF', min_mm: 0.33, max_mm: 0.37}  # set to YOUR stackup's width
+  - {name: RF feed has no vias, type: max_vias, nets: '^/RF', max: 0}
+  - {name: RF feed on top layer only, type: layers, nets: '^/RF', allowed: [F.Cu]}
+  - {name: Crystal nets short and via-free, type: max_vias, nets: '^/XT', max: 0}
+  - {name: Everything routed, type: routed, nets: '^/'}

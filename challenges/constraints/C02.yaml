@@ -1,0 +1,11 @@
+# Template: rename the net patterns to match your schematic's net names.
+# Run: python3 tools/check_constraints.py <board>.kicad_pcb challenges/constraints/C02.yaml
+rules:
+  - {name: Upstream SSTX skew, type: diff_pair, pos: /US_SSTX_P, neg: /US_SSTX_N, max_skew_mm: 0.13, max_length_mm: 100}
+  - {name: Upstream SSRX skew, type: diff_pair, pos: /US_SSRX_P, neg: /US_SSRX_N, max_skew_mm: 0.13, max_length_mm: 100}
+  - {name: DS1 SSTX skew, type: diff_pair, pos: /DS1_SSTX_P, neg: /DS1_SSTX_N, max_skew_mm: 0.13, max_length_mm: 100}
+  - {name: DS1 SSRX skew, type: diff_pair, pos: /DS1_SSRX_P, neg: /DS1_SSRX_N, max_skew_mm: 0.13, max_length_mm: 100}
+  # ...repeat for DS2-DS4
+  - {name: Upstream USB2 skew, type: diff_pair, pos: /US_D_P, neg: /US_D_N, max_skew_mm: 1.3}
+  - {name: SS nets max 2 vias, type: max_vias, nets: '_SS(TX|RX)_[PN]$', max: 2}
+  - {name: Everything routed, type: routed, nets: '^/'}

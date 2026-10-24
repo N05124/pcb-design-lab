@@ -1,0 +1,22 @@
+# Example constraints for KiCad's "video" demo board (FPGA + 32-bit video RAM bus).
+# The demo was never designed to these rules; they show how to grade a board.
+rules:
+  - name: Data bus DQ0-7 length-matched within 10 mm
+    type: match_group
+    nets: '^/DQ[0-7]$'
+    tolerance_mm: 10
+  - name: Data bus DQ0-31 length-matched within 25 mm
+    type: match_group
+    nets: '^/DQ\d+$'
+    tolerance_mm: 25
+  - name: Data bus uses at most 4 vias per net
+    type: max_vias
+    nets: '^/DQ\d+$'
+    max: 4
+  - name: Data bus stays on outer signal layers
+    type: layers
+    nets: '^/DQ\d+$'
+    allowed: [F.Cu, B.Cu]
+  - name: Every signal net has copper
+    type: routed
+    nets: '^/'
